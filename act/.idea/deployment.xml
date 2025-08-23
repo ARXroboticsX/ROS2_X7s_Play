@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="arx5090@192.168.31.117:22 password">
+    <serverData>
+      <paths name="arx5090">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/arx_model_v2.1test/act" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="arx5090@192.168.31.117:22 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/arx5090/arx_model_v2.1test/act" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

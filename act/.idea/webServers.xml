@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f1a843cd-bcd8-4c98-bdc7-5402bbd2dd1e" name="arx5090">
+        <fileTransfer rootFolder="/home/arx5090" accessType="SFTP" host="192.168.31.117" port="22" sshConfigId="ccbab979-9615-45af-a5f8-91c197ccd73f" sshConfig="arx5090@192.168.31.117:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
