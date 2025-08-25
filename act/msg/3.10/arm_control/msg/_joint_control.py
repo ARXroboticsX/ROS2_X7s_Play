@@ -2,13 +2,6 @@
 # with input from arm_control:msg/JointControl.idl
 # generated code does not contain a copyright notice
 
-# This is being done at the module level and not on the instance level to avoid looking
-# for the same variable multiple times on each instance. This variable is not supposed to
-# change during runtime so it makes sense to only look for it once.
-from os import getenv
-
-ros_python_check_fields = getenv('ROS_PYTHON_CHECK_FIELDS', default='')
-
 
 # Import statements for member types
 
@@ -73,7 +66,6 @@ class JointControl(metaclass=Metaclass_JointControl):
         '_joint_vel',
         '_joint_cur',
         '_mode',
-        '_check_fields',
     ]
 
     _fields_and_field_types = {
@@ -83,8 +75,6 @@ class JointControl(metaclass=Metaclass_JointControl):
         'mode': 'int32',
     }
 
-    # This attribute is used to store an rosidl_parser.definition variable
-    # related to the data type of each of the components the message.
     SLOT_TYPES = (
         rosidl_parser.definition.Array(rosidl_parser.definition.BasicType('float'), 8),  # noqa: E501
         rosidl_parser.definition.Array(rosidl_parser.definition.BasicType('float'), 8),  # noqa: E501
@@ -93,14 +83,9 @@ class JointControl(metaclass=Metaclass_JointControl):
     )
 
     def __init__(self, **kwargs):
-        if 'check_fields' in kwargs:
-            self._check_fields = kwargs['check_fields']
-        else:
-            self._check_fields = ros_python_check_fields == '1'
-        if self._check_fields:
-            assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
-                'Invalid arguments passed to constructor: %s' % \
-                ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
+        assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
+            'Invalid arguments passed to constructor: %s' % \
+            ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
         if 'joint_pos' not in kwargs:
             self.joint_pos = numpy.zeros(8, dtype=numpy.float32)
         else:
@@ -123,7 +108,7 @@ class JointControl(metaclass=Metaclass_JointControl):
         typename.pop()
         typename.append(self.__class__.__name__)
         args = []
-        for s, t in zip(self.get_fields_and_field_types().keys(), self.SLOT_TYPES):
+        for s, t in zip(self.__slots__, self.SLOT_TYPES):
             field = getattr(self, s)
             fieldstr = repr(field)
             # We use Python array type for fields that can be directly stored
@@ -137,12 +122,11 @@ class JointControl(metaclass=Metaclass_JointControl):
                 if len(field) == 0:
                     fieldstr = '[]'
                 else:
-                    if self._check_fields:
-                        assert fieldstr.startswith('array(')
+                    assert fieldstr.startswith('array(')
                     prefix = "array('X', "
                     suffix = ')'
                     fieldstr = fieldstr[len(prefix):-len(suffix)]
-            args.append(s + '=' + fieldstr)
+            args.append(s[1:] + '=' + fieldstr)
         return '%s(%s)' % ('.'.join(typename), ', '.join(args))
 
     def __eq__(self, other):
@@ -170,14 +154,14 @@ class JointControl(metaclass=Metaclass_JointControl):
 
     @joint_pos.setter
     def joint_pos(self, value):
-        if self._check_fields:
-            if isinstance(value, numpy.ndarray):
-                assert value.dtype == numpy.float32, \
-                    "The 'joint_pos' numpy.ndarray() must have the dtype of 'numpy.float32'"
-                assert value.size == 8, \
-                    "The 'joint_pos' numpy.ndarray() must have a size of 8"
-                self._joint_pos = value
-                return
+        if isinstance(value, numpy.ndarray):
+            assert value.dtype == numpy.float32, \
+                "The 'joint_pos' numpy.ndarray() must have the dtype of 'numpy.float32'"
+            assert value.size == 8, \
+                "The 'joint_pos' numpy.ndarray() must have a size of 8"
+            self._joint_pos = value
+            return
+        if __debug__:
             from collections.abc import Sequence
             from collections.abc import Set
             from collections import UserList
@@ -201,14 +185,14 @@ class JointControl(metaclass=Metaclass_JointControl):
 
     @joint_vel.setter
     def joint_vel(self, value):
-        if self._check_fields:
-            if isinstance(value, numpy.ndarray):
-                assert value.dtype == numpy.float32, \
-                    "The 'joint_vel' numpy.ndarray() must have the dtype of 'numpy.float32'"
-                assert value.size == 8, \
-                    "The 'joint_vel' numpy.ndarray() must have a size of 8"
-                self._joint_vel = value
-                return
+        if isinstance(value, numpy.ndarray):
+            assert value.dtype == numpy.float32, \
+                "The 'joint_vel' numpy.ndarray() must have the dtype of 'numpy.float32'"
+            assert value.size == 8, \
+                "The 'joint_vel' numpy.ndarray() must have a size of 8"
+            self._joint_vel = value
+            return
+        if __debug__:
             from collections.abc import Sequence
             from collections.abc import Set
             from collections import UserList
@@ -232,14 +216,14 @@ class JointControl(metaclass=Metaclass_JointControl):
 
     @joint_cur.setter
     def joint_cur(self, value):
-        if self._check_fields:
-            if isinstance(value, numpy.ndarray):
-                assert value.dtype == numpy.float32, \
-                    "The 'joint_cur' numpy.ndarray() must have the dtype of 'numpy.float32'"
-                assert value.size == 8, \
-                    "The 'joint_cur' numpy.ndarray() must have a size of 8"
-                self._joint_cur = value
-                return
+        if isinstance(value, numpy.ndarray):
+            assert value.dtype == numpy.float32, \
+                "The 'joint_cur' numpy.ndarray() must have the dtype of 'numpy.float32'"
+            assert value.size == 8, \
+                "The 'joint_cur' numpy.ndarray() must have a size of 8"
+            self._joint_cur = value
+            return
+        if __debug__:
             from collections.abc import Sequence
             from collections.abc import Set
             from collections import UserList
@@ -263,7 +247,7 @@ class JointControl(metaclass=Metaclass_JointControl):
 
     @mode.setter
     def mode(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, int), \
                 "The 'mode' field must be of type 'int'"

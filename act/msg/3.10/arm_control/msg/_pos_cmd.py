@@ -2,13 +2,6 @@
 # with input from arm_control:msg/PosCmd.idl
 # generated code does not contain a copyright notice
 
-# This is being done at the module level and not on the instance level to avoid looking
-# for the same variable multiple times on each instance. This variable is not supposed to
-# change during runtime so it makes sense to only look for it once.
-from os import getenv
-
-ros_python_check_fields = getenv('ROS_PYTHON_CHECK_FIELDS', default='')
-
 
 # Import statements for member types
 
@@ -92,7 +85,6 @@ class PosCmd(metaclass=Metaclass_PosCmd):
         '_mode1',
         '_mode2',
         '_time_count',
-        '_check_fields',
     ]
 
     _fields_and_field_types = {
@@ -122,8 +114,6 @@ class PosCmd(metaclass=Metaclass_PosCmd):
         'time_count': 'int32',
     }
 
-    # This attribute is used to store an rosidl_parser.definition variable
-    # related to the data type of each of the components the message.
     SLOT_TYPES = (
         rosidl_parser.definition.BasicType('double'),  # noqa: E501
         rosidl_parser.definition.BasicType('double'),  # noqa: E501
@@ -152,14 +142,9 @@ class PosCmd(metaclass=Metaclass_PosCmd):
     )
 
     def __init__(self, **kwargs):
-        if 'check_fields' in kwargs:
-            self._check_fields = kwargs['check_fields']
-        else:
-            self._check_fields = ros_python_check_fields == '1'
-        if self._check_fields:
-            assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
-                'Invalid arguments passed to constructor: %s' % \
-                ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
+        assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
+            'Invalid arguments passed to constructor: %s' % \
+            ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
         self.x = kwargs.get('x', float())
         self.y = kwargs.get('y', float())
         self.z = kwargs.get('z', float())
@@ -198,7 +183,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
         typename.pop()
         typename.append(self.__class__.__name__)
         args = []
-        for s, t in zip(self.get_fields_and_field_types().keys(), self.SLOT_TYPES):
+        for s, t in zip(self.__slots__, self.SLOT_TYPES):
             field = getattr(self, s)
             fieldstr = repr(field)
             # We use Python array type for fields that can be directly stored
@@ -212,12 +197,11 @@ class PosCmd(metaclass=Metaclass_PosCmd):
                 if len(field) == 0:
                     fieldstr = '[]'
                 else:
-                    if self._check_fields:
-                        assert fieldstr.startswith('array(')
+                    assert fieldstr.startswith('array(')
                     prefix = "array('X', "
                     suffix = ')'
                     fieldstr = fieldstr[len(prefix):-len(suffix)]
-            args.append(s + '=' + fieldstr)
+            args.append(s[1:] + '=' + fieldstr)
         return '%s(%s)' % ('.'.join(typename), ', '.join(args))
 
     def __eq__(self, other):
@@ -285,7 +269,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @x.setter
     def x(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'x' field must be of type 'float'"
@@ -300,7 +284,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @y.setter
     def y(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'y' field must be of type 'float'"
@@ -315,7 +299,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @z.setter
     def z(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'z' field must be of type 'float'"
@@ -330,7 +314,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @roll.setter
     def roll(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'roll' field must be of type 'float'"
@@ -345,7 +329,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @pitch.setter
     def pitch(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'pitch' field must be of type 'float'"
@@ -360,7 +344,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @yaw.setter
     def yaw(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'yaw' field must be of type 'float'"
@@ -375,7 +359,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @gripper.setter
     def gripper(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'gripper' field must be of type 'float'"
@@ -390,7 +374,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @quater_x.setter
     def quater_x(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'quater_x' field must be of type 'float'"
@@ -405,7 +389,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @quater_y.setter
     def quater_y(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'quater_y' field must be of type 'float'"
@@ -420,7 +404,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @quater_z.setter
     def quater_z(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'quater_z' field must be of type 'float'"
@@ -435,7 +419,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @quater_w.setter
     def quater_w(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'quater_w' field must be of type 'float'"
@@ -450,7 +434,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @chx.setter
     def chx(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'chx' field must be of type 'float'"
@@ -465,7 +449,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @chy.setter
     def chy(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'chy' field must be of type 'float'"
@@ -480,7 +464,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @chz.setter
     def chz(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'chz' field must be of type 'float'"
@@ -495,7 +479,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @vel_l.setter
     def vel_l(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'vel_l' field must be of type 'float'"
@@ -510,7 +494,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @vel_r.setter
     def vel_r(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'vel_r' field must be of type 'float'"
@@ -525,7 +509,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @height.setter
     def height(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'height' field must be of type 'float'"
@@ -540,7 +524,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @head_pit.setter
     def head_pit(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'head_pit' field must be of type 'float'"
@@ -555,7 +539,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @head_yaw.setter
     def head_yaw(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, float), \
                 "The 'head_yaw' field must be of type 'float'"
@@ -570,14 +554,14 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @temp_float_data.setter
     def temp_float_data(self, value):
-        if self._check_fields:
-            if isinstance(value, numpy.ndarray):
-                assert value.dtype == numpy.float64, \
-                    "The 'temp_float_data' numpy.ndarray() must have the dtype of 'numpy.float64'"
-                assert value.size == 6, \
-                    "The 'temp_float_data' numpy.ndarray() must have a size of 6"
-                self._temp_float_data = value
-                return
+        if isinstance(value, numpy.ndarray):
+            assert value.dtype == numpy.float64, \
+                "The 'temp_float_data' numpy.ndarray() must have the dtype of 'numpy.float64'"
+            assert value.size == 6, \
+                "The 'temp_float_data' numpy.ndarray() must have a size of 6"
+            self._temp_float_data = value
+            return
+        if __debug__:
             from collections.abc import Sequence
             from collections.abc import Set
             from collections import UserList
@@ -601,14 +585,14 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @temp_int_data.setter
     def temp_int_data(self, value):
-        if self._check_fields:
-            if isinstance(value, numpy.ndarray):
-                assert value.dtype == numpy.int32, \
-                    "The 'temp_int_data' numpy.ndarray() must have the dtype of 'numpy.int32'"
-                assert value.size == 6, \
-                    "The 'temp_int_data' numpy.ndarray() must have a size of 6"
-                self._temp_int_data = value
-                return
+        if isinstance(value, numpy.ndarray):
+            assert value.dtype == numpy.int32, \
+                "The 'temp_int_data' numpy.ndarray() must have the dtype of 'numpy.int32'"
+            assert value.size == 6, \
+                "The 'temp_int_data' numpy.ndarray() must have a size of 6"
+            self._temp_int_data = value
+            return
+        if __debug__:
             from collections.abc import Sequence
             from collections.abc import Set
             from collections import UserList
@@ -632,7 +616,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @mode1.setter
     def mode1(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, int), \
                 "The 'mode1' field must be of type 'int'"
@@ -647,7 +631,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @mode2.setter
     def mode2(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, int), \
                 "The 'mode2' field must be of type 'int'"
@@ -662,7 +646,7 @@ class PosCmd(metaclass=Metaclass_PosCmd):
 
     @time_count.setter
     def time_count(self, value):
-        if self._check_fields:
+        if __debug__:
             assert \
                 isinstance(value, int), \
                 "The 'time_count' field must be of type 'int'"
