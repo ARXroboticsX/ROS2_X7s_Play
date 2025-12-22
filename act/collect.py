@@ -285,6 +285,7 @@ def save_data(args, timesteps, actions, actions_eef, action_bases, action_veloci
         '/observations/effort': [],
         '/observations/eef': [],
         '/observations/robot_base': [],
+        '/observations/base_velocity': [],
         '/action': [],
         '/action_eef': [],
         '/action_base': [],
@@ -311,6 +312,8 @@ def save_data(args, timesteps, actions, actions_eef, action_bases, action_veloci
         data_dict['/observations/eef'].append(ts['eef'])
         data_dict['/observations/effort'].append(ts['effort'])
         data_dict['/observations/robot_base'].append(ts['robot_base'])
+        data_dict['/observations/base_velocity'].append(ts['base_velocity'])
+        
         data_dict['/action'].append(action)
         data_dict['/action_eef'].append(action_eef)
         data_dict['/action_base'].append(action_base)
